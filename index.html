@@ -1,0 +1,1384 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="apple-touch-fullscreen" content="yes"/>
+    
+  <title>Messenger</title>
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/app.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/message.css" />
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="img/icons/icon57x57.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="img/icons/icon114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/icons/icon72x72.png" />
+
+  <link rel="apple-touch-startup-image" href="img/splash.png" />
+</head>
+<body>
+  <!--<script type="text/x-handlebars-template" id="header_template">
+    <header class="header">
+      <button class="{{ type }}">{{ scope_button }}</button>
+      <h1>{{ header }}</h1>
+      <button class="{{ type }} {{ variant }}">{{ action_button }}</button>
+    </header>
+  </script>
+  
+  <script type="text/x-handlebars-template" id="message_footer_template">
+    <footer class="footer">
+      <button class="icon camera">C</button>
+      <textarea placeholder="Message" class="sms_input search_style"></textarea>
+      <button class="green">Send</button>
+    </footer>
+  </script>
+  
+  <script type="text/x-handlebars-template" id="list_search_template">
+    <div class="blue_gray_g list_search">  
+      <input type="search" placeholder="Search" />
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars-template" id="row_template">
+    // <article class="row">
+    <div class="box vertical flex">
+      <header class="box">
+        <h1>{{ header }}</h1>
+        <time>{{ time }}</time>
+      </header>
+      <p>{{ message }}</p>
+    </div>
+    <div class="box center arrow">A</div>
+  </script>
+  
+  <script type="text/x-handlebars-template" id="message_template">
+    // <article class="message cf">
+    <footer>
+      <time>{{ time }}</time>
+    </footer>
+
+    <div class="content {{ messenger }}">
+      <p>{{ message }}</p>
+    </div>
+  </script>-->
+  
+  <header class="app header">
+    <button class="back">Messages</button>
+    <h1>Messages</h1>
+    <button class="icon write">W</button>
+  </header>
+
+  <div class="pages_wrapper">
+    <section class="page_wrapper">
+      <div class="notifs" style="display:none">
+        Refreshing ...
+      </div>
+      <article class="page list">
+        <div class="pull_refresh">
+          <div class="rotator" id="rotator"></div>
+        </div>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Samuel "Motherfucker" Jackson</h1>
+              <time>13:41</time>
+            </header>
+            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>The Joker</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And... here... we... go!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Potato Pong</h1>
+              <time>Yesterday</time>
+            </header>
+            <p>And-a one, and-a four, and a ching chong potato</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Louis C.K.</h1>
+              <time>Wednesday</time>
+            </header>
+            <p>The meal is not over when I'm full. The meal is over when I hate myself.</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Chuck Testa</h1>
+              <time>Monday</time>
+            </header>
+            <p>NOPE!</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+        <article class="row">
+          <div class="box center status"></div>
+          <div class="box vertical flex">
+            <header class="box">
+              <h1>Dead Guy</h1>
+              <time>Monday</time>
+            </header>
+            <p>Not here man</p>
+          </div>
+          <div class="box center arrow">A</div>
+        </article>
+      </article>
+    </section>
+    <section class="page_wrapper">
+      <article class="page messages">
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 01:23</time>
+          </footer>
+  
+          <div class="content sender">
+            <p>What do a short-sighted gynaecologist and a puppy have in common?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 08:01</time>
+          </footer>
+          
+          <div class="content">
+            <p>A wet nose.</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 12:40</time>
+          </footer>
+          
+          <div class="content">
+            <p>What is a Lawyer's wife's name?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 23:56</time>
+          </footer>
+          
+          <div class="content sender">
+            <p>Sue</p>
+          </div>
+        </article>
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 01:23</time>
+          </footer>
+  
+          <div class="content sender">
+            <p>What do a short-sighted gynaecologist and a puppy have in common?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 08:01</time>
+          </footer>
+          
+          <div class="content">
+            <p>A wet nose.</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 12:40</time>
+          </footer>
+          
+          <div class="content">
+            <p>What is a Lawyer's wife's name?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 23:56</time>
+          </footer>
+          
+          <div class="content sender">
+            <p>Sue</p>
+          </div>
+        </article>
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 01:23</time>
+          </footer>
+  
+          <div class="content sender">
+            <p>What do a short-sighted gynaecologist and a puppy have in common?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 08:01</time>
+          </footer>
+          
+          <div class="content">
+            <p>A wet nose.</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 12:40</time>
+          </footer>
+          
+          <div class="content">
+            <p>What is a Lawyer's wife's name?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 23:56</time>
+          </footer>
+          
+          <div class="content sender">
+            <p>Sue</p>
+          </div>
+        </article>
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 01:23</time>
+          </footer>
+  
+          <div class="content sender">
+            <p>What do a short-sighted gynaecologist and a puppy have in common?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 08:01</time>
+          </footer>
+          
+          <div class="content">
+            <p>A wet nose.</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 12:40</time>
+          </footer>
+          
+          <div class="content">
+            <p>What is a Lawyer's wife's name?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 23:56</time>
+          </footer>
+          
+          <div class="content sender">
+            <p>Sue</p>
+          </div>
+        </article>
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 01:23</time>
+          </footer>
+  
+          <div class="content sender">
+            <p>What do a short-sighted gynaecologist and a puppy have in common?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 08:01</time>
+          </footer>
+          
+          <div class="content">
+            <p>A wet nose.</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 12:40</time>
+          </footer>
+          
+          <div class="content">
+            <p>What is a Lawyer's wife's name?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 23:56</time>
+          </footer>
+          
+          <div class="content sender">
+            <p>Sue</p>
+          </div>
+        </article>
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 01:23</time>
+          </footer>
+  
+          <div class="content sender">
+            <p>What do a short-sighted gynaecologist and a puppy have in common?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 08:01</time>
+          </footer>
+          
+          <div class="content">
+            <p>A wet nose.</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 12:40</time>
+          </footer>
+          
+          <div class="content">
+            <p>What is a Lawyer's wife's name?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 23:56</time>
+          </footer>
+          
+          <div class="content sender">
+            <p>Sue</p>
+          </div>
+        </article>
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 01:23</time>
+          </footer>
+  
+          <div class="content sender">
+            <p>What do a short-sighted gynaecologist and a puppy have in common?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 08:01</time>
+          </footer>
+          
+          <div class="content">
+            <p>A wet nose.</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 12:40</time>
+          </footer>
+          
+          <div class="content">
+            <p>What is a Lawyer's wife's name?</p>
+          </div>
+        </article>
+        
+        <article class="message cf">
+          <footer>
+            <time>19 sep 2011 23:56</time>
+          </footer>
+          
+          <div class="content sender">
+            <p>Sue</p>
+          </div>
+        </article>
+      </article>
+      
+      <footer>
+        <form class="footer"> 
+          <button class="icon camera">C</button>
+          <textarea placeholder="Message" class="sms_input search_style" id="sms_textarea"></textarea>
+          <button class="green">Send</button>
+        </form>
+      </footer>
+    </section>
+  </div>
+
+  
+  <div class="slide_up" style="display:none"> 
+    <header class="header">
+      <button class="close">Close</button>
+      <h1>New Message</h1>
+      <button class="action">Save</button>
+    </header>
+    
+    <div class="pages_wrapper">
+      <section class="page_wrapper">
+        <article class="page messages">
+          <article class="message cf">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Dude.</p>
+            </div>
+          </article>
+          <article class="message">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Yeah.</p>
+            </div>
+          </article>
+          <article class="message cf">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Dude.</p>
+            </div>
+          </article>
+          <article class="message">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Yeah.</p>
+            </div>
+          </article>
+          <article class="message cf">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Dude.</p>
+            </div>
+          </article>
+          <article class="message">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Yeah.</p>
+            </div>
+          </article>
+          <article class="message cf">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Dude.</p>
+            </div>
+          </article>
+          <article class="message">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Yeah.</p>
+            </div>
+          </article>
+          <article class="message cf">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Dude.</p>
+            </div>
+          </article>
+          <article class="message">
+            <footer>
+              <time>19 sep 2011 08:01</time>
+            </footer>
+            
+            <div class="content">
+              <p>Yeah.</p>
+            </div>
+          </article>
+        </article>
+      </section>
+    </div>
+    
+    <footer>
+      <form class="footer" id="slideform">
+        <button tabindex="-1" class="icon camera">C</button>
+        <textarea placeholder="Message" type="text" tabindex="-1" class="sms_input search_style"></textarea>
+        <button tabindex="-1" class="green" type="submit">Send</button>
+      </form>
+    </footer>
+  </div>
+  
+  <script src="js/libs/zepto.js"></script>
+<!--  
+  <script src="js/libs/underscore.js"></script>
+  <script src="js/libs/backbone.js"></script>
+  <script src="js/libs/handlebars.js"></script> 
+-->
+  <script src="js/libs/touch.js" defer></script>
+  <script src="js/libs/scrollFix.js"></script> 
+  <script src="js/compiled/touch.js"></script>
+  <script src="js/compiled/anim.js"></script>
+  <script src="js/compiled/input.js"></script>
+  <script src="js/compiled/app.js"></script>
+<!--  
+  <script src="js/compiled/models.js"></script>
+  <script src="js/compiled/views.js"></script> 
+-->
+</body>
+</html>
