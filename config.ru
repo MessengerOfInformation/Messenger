@@ -1,9 +1,16 @@
-require 'rubygems'
-require 'rack'
-require 'rack/contrib'
-#require 'rack-offline'
+Rack::Mime::MIME_TYPES.merge!({ ".appcache" => "text/cache-manifest" })
 
-use Rack::ETag
+use Rack::Static, 
+  :urls => ["/js", "/css", "/img"],
+  :root => "."
 
-#match "/manifest.appcache" => Rails::Offline
-run Rack::Directory.new('.')
+run lambda { |env|
+  [
+    200, 
+    {
+      'Content-Type'  => 'text/html', 
+      'Cache-Control' => 'public, max-age=86400' 
+    },
+    File.open('./index.html', File::RDONLY)
+  ]
+}
