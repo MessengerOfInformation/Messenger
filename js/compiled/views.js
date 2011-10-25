@@ -10,11 +10,11 @@
     return child;
   }, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   templates = {
-    header: Handlebars.compile(document.getElementById("header_template").innerHTML),
-    message_footer: Handlebars.compile(document.getElementById("message_footer_template").innerHTML),
-    message: Handlebars.compile(document.getElementById("message_template").innerHTML),
-    row: Handlebars.compile(document.getElementById("row_template").innerHTML),
-    list_search: Handlebars.compile(document.getElementById("list_search_template").innerHTML)
+    header: Handlebars.templates.header,
+    message_footer: Handlebars.templates.message_footer,
+    message: Handlebars.templates.message,
+    row: Handlebars.templates.row,
+    list_search: Handlebars.templates.list_search
   };
   view = (function() {
     __extends(view, Backbone.View);

@@ -37,7 +37,6 @@
         this.el.style["overflowY"] = "hidden";
         this.$form = this.$el.parent("form");
         this.$submit = this.$form.find("[type=submit]");
-        console.log(this.$submit);
         this.$el.bind("keypress", __bind(function(e) {
           var input;
           input = e.target.value;

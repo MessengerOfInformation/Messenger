@@ -6,6 +6,7 @@
   };
   $(function() {
     var convertSMSTime, insertBr;
+    APP.init();
     $(".sms_input").autogrow(function(msg) {
       return console.log("callback msg", msg);
     }, {

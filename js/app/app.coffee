@@ -8,6 +8,8 @@ window.APP =
 #############################################
 
 $ ->
+  APP.init()
+  
   $(".sms_input").autogrow (msg) ->
     console.log "callback msg", msg
   , allowEnter : false

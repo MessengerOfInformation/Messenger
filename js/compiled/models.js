@@ -64,8 +64,7 @@
     list.prototype.url = "data.json";
     list.prototype.el = "albums";
     list.prototype.initialize = function(models, options) {
-      list.__super__.initialize.call(this);
-      return this.fetch();
+      return list.__super__.initialize.call(this);
     };
     return list;
   })();

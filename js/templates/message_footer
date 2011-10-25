@@ -1,0 +1,5 @@
+<form class="footer" id="slideform">
+  <button tabindex="-1" class="icon camera">C</button>
+  <textarea placeholder="Message" type="text" tabindex="-1" class="sms_input search_style"></textarea>
+  <button tabindex="-1" class="green" type="submit">Send</button>
+</form>

@@ -51,5 +51,5 @@ class collections.list extends collection
   el : "albums"
   initialize : (models, options) ->
     super()
-    @fetch()
+    #@fetch()
     

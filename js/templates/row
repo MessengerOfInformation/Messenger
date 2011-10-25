@@ -1,0 +1,8 @@
+<div class="box vertical flex">
+  <header class="box">
+    <h1>{{ header }}</h1>
+    <time>{{ time }}</time>
+  </header>
+  <p>{{ message }}</p>
+</div>
+<div class="box center arrow">A</div>

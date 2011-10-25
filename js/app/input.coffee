@@ -32,8 +32,6 @@
       @$form = @$el.parent("form")
       @$submit = @$form.find("[type=submit]")
       
-      console.log @$submit
-      
       # bind events
       @$el.bind "keypress", ( e ) =>
         input = e.target.value

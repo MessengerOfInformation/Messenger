@@ -1,0 +1,3 @@
+<button class="{{ type }}">{{ scope_button }}</button>
+<h1>{{ header }}</h1>
+<button class="{{ type }} {{ variant }}">{{ action_button }}</button>
