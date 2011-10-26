@@ -1,14 +1,14 @@
 CACHE MANIFEST
 
-#version 1.0 10-24-2011
+#version 1.0 10-27-2011
 
 CACHE:
 
 #images
-
+css/icons/icons.ttf
+css/img/blackArrow.png
 
 #internal HTML documents
-
 
 #style sheets
 css/app.css
@@ -20,12 +20,18 @@ css/message.css
 
 #javascript files
 js/libs/zepto.js
+js/libs/underscore.js
+js/libs/backbone.js
+js/libs/handlebars.vm.js
 js/libs/touch.js
 js/libs/scrollFix.js
 js/compiled/touch.js
 js/compiled/anim.js
 js/compiled/input.js
 js/compiled/app.js
+js/compiled/models.js
+js/compiled/templates.js
+js/compiled/views.js
 
 NETWORK:
 *
