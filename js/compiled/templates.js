@@ -47,13 +47,13 @@ templates['message'] = template(function (Handlebars,depth0,helpers,partials,dat
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "time", { hash: {} }); }
   buffer += escapeExpression(stack1) + "</time>\n</footer>\n\n<div class=\"content ";
-  stack1 = helpers.messenger || depth0.messenger
+  stack1 = helpers.sender || depth0.sender
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "messenger", { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "sender", { hash: {} }); }
   buffer += escapeExpression(stack1) + "\">\n  <p>";
-  stack1 = helpers.message || depth0.message
+  stack1 = helpers.body || depth0.body
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "message", { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "body", { hash: {} }); }
   buffer += escapeExpression(stack1) + "</p>\n</div>";
   return buffer;});
 templates['message_footer'] = template(function (Handlebars,depth0,helpers,partials,data) {
@@ -67,18 +67,18 @@ templates['row'] = template(function (Handlebars,depth0,helpers,partials,data) {
   var buffer = "", stack1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"box vertical flex\">\n  <header class=\"box\">\n    <h1>";
-  stack1 = helpers.header || depth0.header
+  buffer += "<div class=\"box center status\"></div>\n<div class=\"box vertical flex\">\n  <header class=\"box\">\n    <h1>";
+  stack1 = helpers.sender || depth0.sender
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "header", { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "sender", { hash: {} }); }
   buffer += escapeExpression(stack1) + "</h1>\n    <time>";
   stack1 = helpers.time || depth0.time
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
   else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "time", { hash: {} }); }
   buffer += escapeExpression(stack1) + "</time>\n  </header>\n  <p>";
-  stack1 = helpers.message || depth0.message
+  stack1 = helpers.body || depth0.body
   if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "message", { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "body", { hash: {} }); }
   buffer += escapeExpression(stack1) + "</p>\n</div>\n<div class=\"box center arrow\">A</div>";
   return buffer;});
 })()

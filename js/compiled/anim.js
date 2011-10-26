@@ -1,25 +1,24 @@
 (function() {
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   $(function() {
-    var $pages_wrapper, $slide_up, BindPullStates, bindTapState;
-    $pages_wrapper = $(".pages_wrapper");
-    $pages_wrapper.page = "left";
-    $pages_wrapper.bind("webkitTransitionEnd", function() {});
-    $(".row").bind("fastTap", function() {
-      var el, _i, _len, _ref, _results;
-      $pages_wrapper[0].style["-webkit-transform"] = "translate3d(-100%,0,0)";
-      $pages_wrapper.page = "right";
-      _ref = $(".messages");
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        el = _ref[_i];
-        _results.push(el.scrollTop = el.scrollHeight);
-      }
-      return _results;
-    });
+    var $slide_up, Antimator, BindPullStates, bindTapState;
+    Antimator = function(element) {
+      var el;
+      el = element;
+      return (function() {
+        return {
+          goRight: function() {
+            return el.style["-webkit-transform"] = "translate3d(-100%,0,0)";
+          },
+          goLeft: function() {
+            return el.style["-webkit-transform"] = "translate3d(0,0,0)";
+          }
+        };
+      })();
+    };
+    window.pageAntimator = new Antimator($(".pages_wrapper")[0]);
     $(".back").bind("fastTap", function() {
-      $pages_wrapper[0].style["-webkit-transform"] = "translate3d(0,0,0)";
-      return $pages_wrapper.page = "left";
+      return pageAntimator.goLeft();
     });
     $slide_up = $(".slide_up");
     $slide_up.vis = false;

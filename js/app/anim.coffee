@@ -1,20 +1,17 @@
 $ ->
-
-  # --------------
-  # Page Transition Demo:
-  $pages_wrapper = $(".pages_wrapper")
-  $pages_wrapper.page = "left"
-  $pages_wrapper.bind "webkitTransitionEnd", ->
-  $(".row").bind "fastTap", ->
-    $pages_wrapper[0].style["-webkit-transform"] = "translate3d(-100%,0,0)"
-    $pages_wrapper.page = "right"
-    for el in $(".messages")
-      el.scrollTop = el.scrollHeight
-
+  
+  Antimator = (element) ->
+    el = element
+    do ->
+      goRight : ->
+        el.style["-webkit-transform"] = "translate3d(-100%,0,0)"
+      goLeft : ->
+        el.style["-webkit-transform"] = "translate3d(0,0,0)"
+  
+  window.pageAntimator = new Antimator $(".pages_wrapper")[0]
+  
   $(".back").bind "fastTap", ->
-    $pages_wrapper[0].style["-webkit-transform"] = "translate3d(0,0,0)"
-    $pages_wrapper.page = "left"
-  # --------------
+    pageAntimator.goLeft()
   
   # --------------
   # Slide up stuff

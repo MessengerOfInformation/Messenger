@@ -2,6 +2,6 @@
   <time>{{ time }}</time>
 </footer>
 
-<div class="content {{ messenger }}">
-  <p>{{ message }}</p>
+<div class="content {{ sender }}">
+  <p>{{ body }}</p>
 </div>

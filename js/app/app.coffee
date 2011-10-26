@@ -7,19 +7,27 @@ window.APP =
 
 #############################################
 
+
+
 $ ->
+  
   APP.init()
+  
+  ScrollFix $(".list")[0]
+  ScrollFix $(".messages")[0]
+  
+  ################################
+  ################################
+  ################################
   
   $(".sms_input").autogrow (msg) ->
     console.log "callback msg", msg
   , allowEnter : false
+  
   convertSMSTime = (date) ->
     t = new Date date
     months = [ "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "okt", "nov", "dec" ]
     time = "#{t.getDate()} #{months[t.getMonth()]} #{t.getFullYear()} #{t.getHours()}:#{t.getMinutes()}"
-  
-  ScrollFix $(".list")[0]
-  ScrollFix $(".messages")[0]
   
   insertBr = ( input ) ->
     console.log input.indexOf(/\r/)
@@ -35,3 +43,14 @@ $ ->
     
     $(".messages").forEach (el) ->
       el.scrollTop = el.scrollHeight
+  
+  
+  # Attemt at resizing viewport when keyboard is visible
+  updateBody = ->
+    document.body.style.height = "#{window.innerHeight}px"
+    window.scrollTo(0,0)
+  $('textarea').bind 'focus', ->
+    updateBody()
+  $('textarea').bind 'blur', ->
+    updateBody()
+  

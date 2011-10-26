@@ -1,8 +1,9 @@
+<div class="box center status"></div>
 <div class="box vertical flex">
   <header class="box">
-    <h1>{{ header }}</h1>
+    <h1>{{ sender }}</h1>
     <time>{{ time }}</time>
   </header>
-  <p>{{ message }}</p>
+  <p>{{ body }}</p>
 </div>
 <div class="box center arrow">A</div>
