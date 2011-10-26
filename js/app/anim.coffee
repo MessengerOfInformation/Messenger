@@ -111,12 +111,12 @@ $ ->
   # --------------
   # --------------
 
-  bindTapState = ( selector, options ) ->
+  bindTapState = ( selector, element, options ) ->
     defaults =
       clearActive : 350
     options = $.extend defaults, options
     sel = $ selector
-    sel.bind "tapInstant", (e, origEvent) ->
+    sel.delegate element, "tapInstant", (e, origEvent) ->
       el = activeTap = $(this)[0]
       el.classList.add "active"
       console.log "tapInstant"
@@ -125,18 +125,18 @@ $ ->
           el.classList.remove "active"
         , options.clearActive
       
-    sel.bind "activeTap", (e, origEvent) ->
+    sel.delegate element, "activeTap", (e, origEvent) ->
       el = activeTap = $(this)[0]
       el.classList.add "active"
       console.log "Longtap"
-    sel.bind "endActiveTap", (e, origEvent) ->
+    sel.delegate element, "endActiveTap", (e, origEvent) ->
       el = $(this)[0]
       activeTap = undefined
       el.classList.remove "active"
       console.log "move"
       
-  bindTapState ".row"
-  bindTapState ".header button"
+  bindTapState "#list", ".row"
+  bindTapState ".header", "button"
 
   # --------------
   # --------------

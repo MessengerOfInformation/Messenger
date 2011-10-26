@@ -110,14 +110,14 @@
         }, 100);
       }, this))();
     });
-    bindTapState = function(selector, options) {
+    bindTapState = function(selector, element, options) {
       var defaults, sel;
       defaults = {
         clearActive: 350
       };
       options = $.extend(defaults, options);
       sel = $(selector);
-      sel.bind("tapInstant", function(e, origEvent) {
+      sel.delegate(element, "tapInstant", function(e, origEvent) {
         var activeTap, el;
         el = activeTap = $(this)[0];
         el.classList.add("active");
@@ -128,13 +128,13 @@
           }, options.clearActive);
         }
       });
-      sel.bind("activeTap", function(e, origEvent) {
+      sel.delegate(element, "activeTap", function(e, origEvent) {
         var activeTap, el;
         el = activeTap = $(this)[0];
         el.classList.add("active");
         return console.log("Longtap");
       });
-      return sel.bind("endActiveTap", function(e, origEvent) {
+      return sel.delegate(element, "endActiveTap", function(e, origEvent) {
         var activeTap, el;
         el = $(this)[0];
         activeTap = void 0;
@@ -142,7 +142,7 @@
         return console.log("move");
       });
     };
-    bindTapState(".row");
-    return bindTapState(".header button");
+    bindTapState("#list", ".row");
+    return bindTapState(".header", "button");
   });
 }).call(this);
