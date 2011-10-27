@@ -54,9 +54,12 @@
       row.__super__.constructor.apply(this, arguments);
     }
     row.prototype.convertTime = function(time) {
-      var date, t, _dx;
+      var date, padDate, t;
       t = new Date(time);
-      return date = "" + (t.getFullYear()) + "-" + (t.getMonth() + 1) + "-" + (_dx = t.getDate(), _dx < 10 ? '0' + _dx : _dx);
+      padDate = function(n) {
+        return (n < 10 ? '0' : '') + n;
+      };
+      return date = "" + (t.getFullYear()) + "-" + (padDate(t.getMonth() + 1)) + "-" + (padDate(t.getDate()));
     };
     row.prototype.initialize = function() {
       var time;

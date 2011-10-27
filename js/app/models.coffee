@@ -31,7 +31,8 @@ class collection extends Backbone.Collection
 class models.row extends Backbone.Model
   convertTime : (time) ->
     t = new Date time
-    date = "#{ t.getFullYear() }-#{ t.getMonth() + 1 }-#{ _dx = t.getDate(); if _dx < 10 then '0' + _dx else _dx }"
+    padDate = (n) -> (if n < 10 then '0' else '') + n
+    date = "#{ t.getFullYear() }-#{ padDate t.getMonth() + 1 }-#{ padDate t.getDate() }"
   initialize : ->
     time = @get "time"
     @set "time" : @convertTime time
