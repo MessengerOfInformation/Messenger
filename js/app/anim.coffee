@@ -1,38 +1,120 @@
 $ ->
   
-  Antimator = (element) ->
-    el = element
-    do ->
-      goRight : ->
-        el.style["-webkit-transform"] = "translate3d(-100%,0,0)"
-      goLeft : ->
-        el.style["-webkit-transform"] = "translate3d(0,0,0)"
+  class Antimator
+    constructor : ( @options ) ->
+      @el = @options.element
+      # default MAX boundaries => 5 screens in all directions from visible origin 0,0
+      # 1 unit = one screen width/height 
+      # [x0 (left), x1 (right), y0 (up), y1 (down)]
+      @boundaries = @options.boundaries or [ 5, 5, 5, 5 ]
+      
+      # Bind transition end on element
+      @el.addEventListener "webkitTransitionEnd", (e) =>
+        if @options.callback? and typeof @options.callback is "function"
+          @options.callback e, @pos
+        @after e, @pos
+      
+      defaultPositions =
+        # -X+, -Y+
+        visible : [ 0, 0 ]
+        left    : [-1, 0 ]
+        right   : [ 1, 0 ]
+        top     : [ 0,-1 ]
+        bottom  : [ 0, 1 ]
+      pos = defaultPositions[@options.position]
+      
+      # initial setup
+      @before pos
+      @transform pos
+      @pos = pos
+      
+    slide : ( dir ) ->
+      movements =
+        set : ( xy, boundary ) =>
+          setBoundary = @boundaries[boundary]
+          pos = @pos[xy] + [ -1, 1, -1, 1 ][boundary]
+          # if positive int of new pos is within the set boundary
+          # all boundary points are positive ints
+          if Math.abs(pos) <= setBoundary
+            @pos[xy] = pos
+            true
+          else
+            false
+        left  : -> @set 0, 0 # x position, left boundary
+        right : -> @set 0, 1 # x position, right boundary
+        up    : -> @set 1, 2 # y position, top boundary 
+        down  : -> @set 1, 3 # y position, bottom boundary
+      
+      # returns true / false
+      if movements[ dir ]()
+        @before @pos
+        setTimeout => @transform @pos, 0
+    convertXYZ : ( pos ) ->
+      ret = pos.map ( x ) -> x * 100
+      ret.push 0
+      ret
+    transform : ( pos ) ->
+      pos = @convertXYZ pos
+      @el.style["webkitTransform"] = "translate3d(#{ pos.join('%,') })"
+    # called before each transform
+    before : ( pos ) ->
+      if pos[0] is 0 and pos[1] is 0 
+        @visible = true
+      else
+        @visible = false
+    # called after each completed transform
+    after : ( event, pos ) -> null
   
-  window.pageAntimator = new Antimator $(".pages_wrapper")[0]
-  
+  #-------------------------#
+
+  window.pageAntimator = new Antimator 
+    element : $(".pages_wrapper")[0]
+    position : "visible"
+    # => can move one screen to the left
+    boundaries : [ 1, 0, 0, 0 ] 
   $(".back").bind "fastTap", ->
-    pageAntimator.goLeft()
-  
+    pageAntimator.slide("right")
+    
+    ## XXXXX (todo) temp shit
+    # need to build some behaviour abstraction layer
+    activeRow = $(".list").find(".active")
+    setTimeout ->
+      activeRow.removeClass "active"
+    , 400
+    
   # --------------
   # Slide up stuff
-  $slide_up = $(".slide_up")
-  $slide_up.vis = false
-  $slide_up.bind "webkitTransitionEnd", ->
-    $slide_up[0].style["webkitTransitionTimingFunction"] = "ease-in"
-    unless $slide_up.vis
-      $slide_up[0].style["webkitTransitionTimingFunction"] = "ease-out"
-      $slide_up[0].style["display"] = "none"
   
+  class slideAntimator extends Antimator
+    before : ( pos ) ->
+      super pos
+      
+      if @options.toggle and @visible
+        @el.style["display"] = ""
+    after : ( event, pos ) ->
+      if @options.toggle and !@visible
+        @el.style["display"] = "none"
+        
+      if pos[1] >= 100
+        @el.style["webkitTransitionTimingFunction"] = "cubic-bezier(.45,.7,.7,1)"
+      else if pos[1] is 0
+        @el.style["webkitTransitionTimingFunction"] = "cubic-bezier(.3,0,.7,.45)"
+  
+  window.slideUpAntimator = new slideAntimator
+    element : $(".slide_up")[0]
+    position : "bottom"
+    toggle : true
+    # => one screen down 
+    # starting position is the same, so can only move up one screen
+    boundaries : [ 0, 0, 0, 1 ] 
+  
+  # Bind slide screen actions
   $(".write").bind "fastTap", ->
-    $slide_up[0].style["display"] = ""
-    setTimeout  ->
-      $slide_up[0].style["-webkit-transform"] = "translate3d(0,0,0)"
-    , 0
-    $slide_up.vis = true
-
+    slideUpAntimator.slide("up")
+  
   $(".close").bind "fastTap", ->
-    $slide_up[0].style["-webkit-transform"] = "translate3d(0,100%,0)"
-    $slide_up.vis = false
+    slideUpAntimator.slide("down")
+  
   # --------------
   
   # Prevent touchmove on footer and header
@@ -110,7 +192,7 @@ $ ->
   
   # --------------
   # --------------
-
+  
   bindTapState = ( selector, element, options ) ->
     defaults =
       clearActive : 350
@@ -135,7 +217,7 @@ $ ->
       el.classList.remove "active"
       console.log "move"
       
-  bindTapState "#list", ".row"
+  bindTapState "#list", ".row", clearActive : false
   bindTapState ".header", "button"
 
   # --------------
