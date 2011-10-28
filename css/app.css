@@ -79,6 +79,15 @@
 .row.active h1,
 .row.active .arrow        { color: #fff; }
 
+.row.unread .status:after { content: ""; height: 12px; width: 12px; display: block;
+                            -webkit-border-radius: 6px; border-radius: 6px;
+                            background-image: -webkit-gradient(linear, left top, left bottom, from(#85B0F5), to(#2859B4));
+                            background-image: -webkit-linear-gradient(top, #85B0F5, #2859B4);
+                            background-image:         linear-gradient(top, #85B0F5, #2859B4); }
+
+.row.delete time,
+.row.delete .arrow span   { display: none; }
+.row.delete .arrow        { padding-left: 20px; margin-right: 5px; overflow: hidden; width: inherit; }
 
 .search_style,
 input[type=search]        { border: 1px solid; border-color: #777 #888 #999;
@@ -117,11 +126,12 @@ textarea.sms_input        { -webkit-box-flex: 1; display: -webkit-box; margin: 0
 .screen                  { z-index: 100000; position: absolute; overflow: hidden; 
                            bottom: 0; left: 0; right: 0; top: 0; height: 100%; width: 100%;
                            display: -webkit-box; -webkit-box-orient: vertical;
-                           -webkit-transition: -webkit-transform 200ms ease-out; }
+                           -webkit-transition: -webkit-transform 250ms cubic-bezier(.45,.7,.7,1);
+                           /* reverse: cubic-bezier(.3,0,.7,.45) - slide in and out */ }
 .slide_up                { -webkit-transform: translate3d(0, 100%, 0); }
 
-@media only screen and (max-device-width: 1024px) and (orientation:landscape) {
+@media only screen and (max-device-width: 767px) and (orientation:landscape) {
   .header        { height: 32px; padding: 0 5px; } 
   .header h1     { font-size: 16px; }
-  .header button { zoom: .84; line-height: 1.4; margin-top: -1px; }
+  .header button { zoom: .83; line-height: 1.4; margin-top: -1px; }
 }

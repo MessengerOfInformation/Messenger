@@ -1,13 +1,14 @@
 /* HADER BUTTON */
-.header button             { color: #FFF; font-size: 13px; text-shadow: 0 -1px 0 rgba(47, 65, 93, 0.8);
-                             background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8EA4C1), color-stop(50%,#5877A2), color-stop(50%,#476999), color-stop(100%,#4A6C9B));
+button                     { color: #fff; font-size: 13px; text-shadow: 0 -1px 0 rgba(47, 65, 93, 0.8);
+                             -webkit-border-radius: 5px; border-radius: 5px; padding: 0 9px;
+                             border: 1px solid; display: block; }
+.header button             { background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8EA4C1), color-stop(50%,#5877A2), color-stop(50%,#476999), color-stop(100%,#4A6C9B));
                              background-image: -webkit-linear-gradient(top, #8EA4C1 0%,#5877A2 50%,#476999 50%,#4A6C9B 100%);
                              background-image:         linear-gradient(top, #8EA4C1 0%,#5877A2 50%,#476999 50%,#4A6C9B 100%);
-                             border: 1px solid; border-color: #31373F #445B7B #375175;
                              -webkit-box-shadow: 0 1px 0 #9BAABF, inset 0 1px 0 #7D8DA4;
                              box-shadow: 0 1px 0 #9BAABF, inset 0 1px 0 #7D8DA4;
-                             -webkit-border-radius: 5px; border-radius: 5px;
-                             padding: 0 9px; height: 29px; display: block; }
+                             border-color: #31373F #445B7B #375175;
+                             height: 29px;  }
 
 /* HADER ACTION BUTTON (Lighter blue hue, ex 'send' email) */
 .header button.action      { background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7B9EE9), color-stop(50%,#376FE0), color-stop(50%,#2260DD), color-stop(100%,#2463DE));
@@ -78,3 +79,15 @@ button.icon                 { font-family: 'icons'; text-align: center; vertical
                               font-size: 17px; padding: 3px 4px; }
 
 .footer button.green        { width: 73px; font-size: 16px; padding: 0 1px; }
+
+
+/* DELETE BUTTON (ROW) */
+.row.delete .delete       { margin-right: 5px; height: 33px; display: block !important;
+                            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#D17E84), color-stop(50%,#D05761), color-stop(50%,#BD1421), color-stop(100%,#BC1421));
+                            background-image: -webkit-linear-gradient(top, #D17E84 0%,#D05761 50%,#BD1421 50%,#BC1421 100%);
+                            background-image:         linear-gradient(top, #D17E84 0%,#D05761 50%,#BD1421 50%,#BC1421 100%);
+                            border-color: #5C393C #82363D #8F0F19;
+                            font-size: 14px; padding: 0 10px; margin: 0;
+                            -webkit-box-shadow: inset 0 1px 1px -1px #5C393C;
+                            box-shadow: inset 0 1px 1px -1px #5C393C;
+                            -webkit-transform: translate3d(100%, 0, 0); }
