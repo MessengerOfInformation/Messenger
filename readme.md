@@ -12,4 +12,5 @@ General behavior/logic abstraction?
 List search bar
 Textfield input behaves weird, animates like crap
 Delete row slide-in animation doesn't happen
+Pull to refresh icon sux + add text label showing state 
 Plugins
