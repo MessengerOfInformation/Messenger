@@ -700,7 +700,6 @@ var Zepto = (function() {
 
     if (typeof properties == 'string') {
       // keyframe animation
-      console.log(properties)
       cssProperties[prefix + 'animation-name'] = properties;
       cssProperties[prefix + 'animation-duration'] = duration + 's';
       endEvent = $.fx.animationEnd;
@@ -724,7 +723,7 @@ var Zepto = (function() {
       callback && callback.call(this);
     }
     if (duration > 0) this.one(endEvent, wrappedCallback);
-
+    
     setTimeout(function() {
       that.css(cssProperties);
       if (duration <= 0) setTimeout(function() {
