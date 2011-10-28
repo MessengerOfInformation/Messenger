@@ -1,16 +1,24 @@
 (function() {
   "use strict";
   var collection, collections, models;
-  var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
     ctor.prototype = parent.prototype;
     child.prototype = new ctor;
     child.__super__ = parent.prototype;
     return child;
-  }, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  };
   APP.init = function() {
-    return new collections.list;
+    APP.instances.list = new collections.list;
+    APP.instances.messages = new collections.messages;
+    return APP.instances.messages.bind("inserted", __bind(function() {
+      var messages;
+      console.log("Inserted messages");
+      messages = document.getElementById("messages");
+      messages.scrollTop = messages.scrollHeight;
+      return pageAntimator.slide("left");
+    }, this));
   };
   models = {};
   collections = {};
@@ -68,6 +76,13 @@
         "time": this.convertTime(time)
       });
     };
+    row.prototype.open = function() {
+      if (!APP.instances.messages.models.length) {
+        return APP.instances.messages.fetch();
+      } else {
+        return APP.instances.messages.reset().fetch();
+      }
+    };
     return row;
   })();
   collections.list = (function() {
@@ -85,17 +100,6 @@
     };
     list.prototype.comparator = function(row) {
       return -row.get("time");
-    };
-    list.prototype.open = function() {
-      var $pages_wrapper, messages;
-      messages = new collections.messages;
-      $pages_wrapper = $(".pages_wrapper");
-      $pages_wrapper.bind("webkitTransitionEnd", function() {});
-      return messages.bind("inserted", function() {
-        console.log("locked and loaded");
-        $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight;
-        return pageAntimator.goRight();
-      });
     };
     return list;
   })();
@@ -129,11 +133,10 @@
     messages.prototype.url = "data/list.json";
     messages.prototype.el = "messages";
     messages.prototype.initialize = function(models, options) {
-      messages.__super__.initialize.call(this);
-      return this.fetch();
+      return messages.__super__.initialize.call(this);
     };
     messages.prototype.parse = function(response) {
-      response.length = 50;
+      response.length = 10;
       return response;
     };
     return messages;

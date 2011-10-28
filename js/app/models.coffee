@@ -1,11 +1,23 @@
 "use strict"
 
-APP.init = -> new collections.list
+APP.init = -> 
+  APP.instances.list = new collections.list
+  APP.instances.messages = new collections.messages
+  
+  # XXXX (todo) messy...
+  # maybe put the abstract behaviour somewhere seperate, 
+  # ex: always do x when y happens on a
+  APP.instances.messages.bind "inserted", =>
+    console.log "Inserted messages"
+    messages = document.getElementById "messages"
+    messages.scrollTop = messages.scrollHeight
+    
+    pageAntimator.slide("left")
 
 models = {}
 collections = {}
 
-#################################
+############################################
 
 class collection extends Backbone.Collection
   initialize : (models, options) ->
@@ -26,7 +38,7 @@ class collection extends Backbone.Collection
       collection: @
     ).el
     
-##################################
+############################################
 
 class models.row extends Backbone.Model
   convertTime : (time) ->
@@ -36,7 +48,13 @@ class models.row extends Backbone.Model
   initialize : ->
     time = @get "time"
     @set "time" : @convertTime time
-    
+  open : ->
+    # open/load @id record or something
+    unless APP.instances.messages.models.length
+      APP.instances.messages.fetch()
+    else
+      APP.instances.messages.reset().fetch()
+
 class collections.list extends collection
   view : "row"
   model : models.row
@@ -46,15 +64,10 @@ class collections.list extends collection
     super()
     @fetch()
   comparator : (row) ->
-    -row.get "time"
-  open : ->
-    messages = new collections.messages
-    $pages_wrapper = $(".pages_wrapper")
-    $pages_wrapper.bind "webkitTransitionEnd", ->
-    messages.bind "inserted", ->
-      console.log "locked and loaded"
-      $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight
-      pageAntimator.goRight()
+    -row.get "time"    
+
+############################################
+############################################
 
 class models.message extends Backbone.Model
   convertSMSTime : (time) ->
@@ -72,8 +85,7 @@ class collections.messages extends collection
   el : "messages"
   initialize : (models, options) ->
     super()
-    @fetch()
   parse : (response) ->
-    response.length = 50
+    response.length = 10
     response
       

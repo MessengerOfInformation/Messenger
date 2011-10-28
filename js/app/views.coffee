@@ -17,6 +17,7 @@ class view extends Backbone.View
     @render()
   render : ->
     @el.innerHTML = @template @model.toJSON()
+    @$el = $(@el)
     @
   remove : ->
     $(@el).remove()
@@ -44,13 +45,37 @@ class APP.views.row extends view
   template : templates.row
   render : ->
     super()
-  events : 
+    @deleteButton = $(@el).find(".delete_m")[0]
+    @$list = $ ".list"
+  events :
+    "tapInstant .delete .arrow" : "deleteRow"
+    "swipeLeft"  : "deleteState"
+    "swipeRight" : "deleteState"
     "tapInstant" : "open"
-    "swipeLeft"  : "delete"
-  open : ->
-    @collection.open()
-  delete : ->
-    alert "delete"
+  open : -> @model.open()
+  deleteState : ->
+    if @deleting
+      @deleting = false
+      @$list.unbind("touchstart touchend")
+      $(@deleteButton).anim {"translate3d" : "100%, 0 ,0"}, ".2", "ease-out", =>
+        @$el.removeClass "delete"
+    else
+      @deleting = true
+      @$el.addClass "delete"
+      $(@deleteButton).anim {"translate3d" : "0, 0, 0"}, ".2", "ease-out", null
+      $deleteWrapper = $(@el).find(".arrow")[0]
+      @$list.bind( "touchstart", (e) =>
+        unless e.target is $deleteWrapper or e.target is @deleteButton
+          e.stopImmediatePropagation()
+      ).bind( "touchend", (e) =>
+        unless e.target is $deleteWrapper or e.target is @deleteButton
+          e.stopImmediatePropagation()
+          @deleteState()
+      )
+  deleteRow : (e) ->
+    e.stopImmediatePropagation()
+    @$el.fadeOut()
+    @$el.removeClass "delete"
 
 class APP.views.message extends view
   tagName : "article"

@@ -32,6 +32,7 @@
     };
     view.prototype.render = function() {
       this.el.innerHTML = this.template(this.model.toJSON());
+      this.$el = $(this.el);
       return this;
     };
     view.prototype.remove = function() {
@@ -72,17 +73,52 @@
     row.prototype.className = "row";
     row.prototype.template = templates.row;
     row.prototype.render = function() {
-      return row.__super__.render.call(this);
+      row.__super__.render.call(this);
+      this.deleteButton = $(this.el).find(".delete_m")[0];
+      return this.$list = $(".list");
     };
     row.prototype.events = {
-      "tapInstant": "open",
-      "swipeLeft": "delete"
+      "tapInstant .delete .arrow": "deleteRow",
+      "swipeLeft": "deleteState",
+      "swipeRight": "deleteState",
+      "tapInstant": "open"
     };
     row.prototype.open = function() {
-      return this.collection.open();
+      return this.model.open();
     };
-    row.prototype["delete"] = function() {
-      return alert("delete");
+    row.prototype.deleteState = function() {
+      var $deleteWrapper;
+      if (this.deleting) {
+        this.deleting = false;
+        this.$list.unbind("touchstart touchend");
+        return $(this.deleteButton).anim({
+          "translate3d": "100%, 0 ,0"
+        }, ".2", "ease-out", __bind(function() {
+          return this.$el.removeClass("delete");
+        }, this));
+      } else {
+        this.deleting = true;
+        this.$el.addClass("delete");
+        $(this.deleteButton).anim({
+          "translate3d": "0, 0, 0"
+        }, ".2", "ease-out", null);
+        $deleteWrapper = $(this.el).find(".arrow")[0];
+        return this.$list.bind("touchstart", __bind(function(e) {
+          if (!(e.target === $deleteWrapper || e.target === this.deleteButton)) {
+            return e.stopImmediatePropagation();
+          }
+        }, this)).bind("touchend", __bind(function(e) {
+          if (!(e.target === $deleteWrapper || e.target === this.deleteButton)) {
+            e.stopImmediatePropagation();
+            return this.deleteState();
+          }
+        }, this));
+      }
+    };
+    row.prototype.deleteRow = function(e) {
+      e.stopImmediatePropagation();
+      this.$el.fadeOut();
+      return this.$el.removeClass("delete");
     };
     return row;
   })();
