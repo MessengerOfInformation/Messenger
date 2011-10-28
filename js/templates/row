@@ -6,4 +6,7 @@
   </header>
   <p>{{ body }}</p>
 </div>
-<div class="box center arrow">A</div>
+<div class="box center arrow">
+  <span>A</span>
+  <button class="delete delete_m" style="display:none">Delete</button>
+</div>
