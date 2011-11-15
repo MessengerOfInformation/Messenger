@@ -1,5 +1,4 @@
-(function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
   (function($) {
     "use strict";
     var Autogrow, trim;
@@ -12,9 +11,7 @@
     };
     $.fn.autogrow = function(fn, opts) {
       var defaults;
-      if (opts == null) {
-        opts = {};
-      }
+      if (opts == null) opts = {};
       if (typeof fn === "function") {
         opts.fn = fn;
       } else {
@@ -28,7 +25,9 @@
       });
     };
     return Autogrow = (function() {
+
       function Autogrow($el, options) {
+        var _this = this;
         this.$el = $el;
         this.options = options;
         this.el = this.$el[0];
@@ -37,20 +36,21 @@
         this.el.style["overflowY"] = "hidden";
         this.$form = this.$el.parent("form");
         this.$submit = this.$form.find("[type=submit]");
-        this.$el.bind("keypress", __bind(function(e) {
+        this.$el.bind("keypress", function(e) {
           var input;
           input = e.target.value;
-          this.setHeight(trim(input));
-          return this.handleInput(e, input);
-        }, this));
-        this.$form.bind("submit", __bind(function(e) {
+          _this.setHeight(trim(input));
+          return _this.handleInput(e, input);
+        });
+        this.$form.bind("submit", function(e) {
           var input;
-          input = this.el.value;
-          return this.handleInput(e, input);
-        }, this));
+          input = _this.el.value;
+          return _this.handleInput(e, input);
+        });
         this.maxHeight = parseInt(this.$el.css("max-height"), 10);
         this.elHeight = 0;
       }
+
       Autogrow.prototype.setHeight = function(input) {
         var height, scrollHeight;
         if (!input) {
@@ -59,9 +59,7 @@
         }
         scrollHeight = this.el.scrollHeight;
         height = this.el.getBoundingClientRect().height || this.$el.outerHeight();
-        if (!this.heightDiff) {
-          this.heightDiff = (scrollHeight - height) || 0;
-        }
+        if (!this.heightDiff) this.heightDiff = (scrollHeight - height) || 0;
         if (scrollHeight > height) {
           this.elHeight = scrollHeight - this.heightDiff;
           this.el.style["height"] = this.elHeight + "px";
@@ -72,6 +70,7 @@
           return this.el.style["overflowY"] = "hidden";
         }
       };
+
       Autogrow.prototype.handleInput = function(e, input) {
         var submitAllowed, trimmed;
         if (e.keyCode === 13 || e.type === "submit") {
@@ -90,6 +89,7 @@
           }
         }
       };
+
       Autogrow.prototype.triggerOutput = function(input) {
         var message;
         message = {
@@ -97,12 +97,11 @@
           value: input
         };
         this.$el.trigger("onMessage", message);
-        if (this.options.fn) {
-          this.options.fn(message);
-        }
+        if (this.options.fn) this.options.fn(message);
         return message;
       };
+
       return Autogrow;
+
     })();
   })(this.Zepto || this.jQuery);
-}).call(this);

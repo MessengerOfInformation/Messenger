@@ -12,12 +12,16 @@ APP.init = ->
     messages = document.getElementById "messages"
     messages.scrollTop = messages.scrollHeight
     
-    pageAntimator.slide("left")
+    pageAntimator.slide "left", ->
+      $(".back").show()
 
 models = {}
 collections = {}
 
 ############################################
+
+# localStorage.setItem "coll", JSON.stringify coll
+# localStorage.setItem JSON.parse "coll"
 
 class collection extends Backbone.Collection
   initialize : (models, options) ->
@@ -49,6 +53,7 @@ class models.row extends Backbone.Model
     time = @get "time"
     @set "time" : @convertTime time
   open : ->
+    $("#messages_container").show()
     # open/load @id record or something
     unless APP.instances.messages.models.length
       APP.instances.messages.fetch()
@@ -64,7 +69,10 @@ class collections.list extends collection
     super()
     @fetch()
   comparator : (row) ->
-    -row.get "time"    
+    -row.get "time"
+  parse : (response) ->
+    response.length = 30
+    response 
 
 ############################################
 ############################################
@@ -86,6 +94,5 @@ class collections.messages extends collection
   initialize : (models, options) ->
     super()
   parse : (response) ->
-    response.length = 10
+    response.length = 5
     response
-      

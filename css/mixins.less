@@ -1,0 +1,17 @@
+.rounded (@radius) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.gradient (@from, @to) {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
+  background-image: -webkit-linear-gradient(top, @from, @to);
+  background-image:         linear-gradient(top, @from, @to);
+}
+
+.gradient_shade (@x1, @x2, @y1, @y2, @stop: 50%) {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @x1), color-stop(@stop, @x2), color-stop(@stop, @y1), color-stop(100%, @y2));
+  background-image: -webkit-linear-gradient(top, @x1 0%, @x2 @stop, @y1 @stop, @y2 100%);
+  background-image:         linear-gradient(top, @x1 0%, @x2 @stop, @y1 @stop, @y2 100%);
+}

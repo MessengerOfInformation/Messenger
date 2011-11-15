@@ -13,7 +13,7 @@
     # default options (opts)
     # set to false on mobile
     # prevents sending when hitting the enter key
-    defaults = 
+    defaults =
       allowEnter : true
       
     # create a new autogrow instance for each matched selector element

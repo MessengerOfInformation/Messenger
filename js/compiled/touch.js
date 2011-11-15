@@ -1,4 +1,4 @@
-(function() {
+
   (function($) {
     var activeTap, activeTapDelay, activeTapTimeout, fastTouchTimeout, longTap, longTapDelay, parentIfText, swipeDirection, touch, touchTimeout;
     parentIfText = function(node) {
@@ -36,9 +36,7 @@
     };
     longTap = function() {
       if (touch.last && (Date.now() - touch.last >= longTapDelay)) {
-        if (!(touch.x2 || touch.y2)) {
-          return $(touch.target).trigger("longTap");
-        }
+        if (!(touch.x2 || touch.y2)) return $(touch.target).trigger("longTap");
       }
     };
     touch = {};
@@ -57,9 +55,7 @@
         fastTouchTimeout && clearTimeout(fastTouchTimeout);
         touch.x1 = e.touches[0].pageX;
         touch.y1 = e.touches[0].pageY;
-        if (delta > 0 && delta <= 250) {
-          touch.isDoubleTap = true;
-        }
+        if (delta > 0 && delta <= 250) touch.isDoubleTap = true;
         touch.last = now;
         activeTapTimeout = setTimeout(activeTap, activeTapDelay);
         return setTimeout(longTap, longTapDelay);
@@ -102,4 +98,3 @@
       };
     });
   })(this.Zepto);
-}).call(this);

@@ -10,6 +10,12 @@ Using -webkit-overflow-scrolling - so, this only works right on iOS 5 (or a desk
 
 ###TODO:
 
+* Consolidate all the scripts - watch and compile
+  - Templates
+  - Less
+  - CoffeeScript
+  - Server
+
 * Header (animations, page event bindings etc)
 * General behavior/logic abstraction?
 * List search bar

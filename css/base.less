@@ -1,0 +1,33 @@
+/*
+  by: philip harrison > h at rrison dot se
+  from sweden with love
+*/
+
+html                   { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+html, body             { overflow: hidden; }
+body                   { top: 0; left: 0; right: 0; bottom: 0;
+                         -webkit-box-orient: vertical; display: -webkit-box; 
+                         position: absolute; z-index: 0; }
+body, button, input,
+textarea, select       { font: 14px/21px Helvetica, sans-serif; color: #252525;
+                         -webkit-font-smoothing: antialiased;
+                         -webkit-text-size-adjust: 100%; }
+
+h1, h2, h3, h4, h5,
+h6, p, figure, body    { margin: 0; }
+
+h1                     { font-size: 20px; color: #000; }
+
+a:hover, a:active      { outline: none; }
+
+button                 { font-weight: bold; color: #fff; -webkit-appearance: none;
+                         line-height: normal; }
+input, select,
+textarea, button       { -webkit-box-sizing: border-box; box-sizing: border-box; outline: 0; }
+
+::-webkit-input-placeholder { color: #ABABAB; }
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+input[type="search"]   { -webkit-appearance: textfield; }
+
+.cf:before, .cf:after  { content: ""; display: table; }
+.cf:after              { clear: both; }

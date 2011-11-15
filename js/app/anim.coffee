@@ -12,6 +12,9 @@ $ ->
       @el.addEventListener "webkitTransitionEnd", (e) =>
         if @options.callback? and typeof @options.callback is "function"
           @options.callback e, @pos
+        if @options.slideCallback
+          @options.slideCallback e, @pos
+          @options.slideCallback = undefined
         @after e, @pos
       
       defaultPositions =
@@ -21,17 +24,18 @@ $ ->
         right   : [ 1, 0 ]
         top     : [ 0,-1 ]
         bottom  : [ 0, 1 ]
-      pos = defaultPositions[@options.position]
-      
-      # initial setup
-      @before pos
+      @pos = defaultPositions[@options.position]
+    init : ->
+      @before @pos
       @transform pos
-      @pos = pos
-      
-    slide : ( dir ) ->
+    slide : ( direction, callback ) ->
       movements =
-        set : ( xy, boundary ) =>
+        set : ( boundary ) =>
+          # Get the set max boundray
           setBoundary = @boundaries[boundary]
+          # X cords if setting bound 0 or 1., else Y cords
+          xy = if boundary > 1 then 1 else 0
+          # if going left or up, we subtract from current position, else add
           pos = @pos[xy] + [ -1, 1, -1, 1 ][boundary]
           # if positive int of new pos is within the set boundary
           # all boundary points are positive ints
@@ -40,13 +44,16 @@ $ ->
             true
           else
             false
-        left  : -> @set 0, 0 # x position, left boundary
-        right : -> @set 0, 1 # x position, right boundary
-        up    : -> @set 1, 2 # y position, top boundary 
-        down  : -> @set 1, 3 # y position, bottom boundary
+        left  : -> @set 0 # left boundary
+        right : -> @set 1 # right boundary
+        up    : -> @set 2 # top boundary
+        down  : -> @set 3 # bottom boundary
+      
+      if typeof callback is "function"
+        @options.slideCallback = callback
       
       # returns true / false
-      if movements[ dir ]()
+      if movements[ direction ]()
         @before @pos
         setTimeout => @transform @pos, 0
     convertXYZ : ( pos ) ->
@@ -58,7 +65,8 @@ $ ->
       @el.style["webkitTransform"] = "translate3d(#{ pos.join('%,') })"
     # called before each transform
     before : ( pos ) ->
-      if pos[0] is 0 and pos[1] is 0 
+      isVisible = pos.every (x) -> x is 0
+      if isVisible
         @visible = true
       else
         @visible = false
@@ -66,14 +74,17 @@ $ ->
     after : ( event, pos ) -> null
   
   #-------------------------#
-
+  
   window.pageAntimator = new Antimator 
     element : $(".pages_wrapper")[0]
     position : "visible"
     # => can move one screen to the left
     boundaries : [ 1, 0, 0, 0 ] 
+  
   $(".back").bind "fastTap", ->
-    pageAntimator.slide("right")
+    pageAntimator.slide "right", ->
+      $(".back").hide()
+      $("#messages_container").hide()
     
     ## XXXXX (todo) temp shit
     # need to build some behaviour abstraction layer
@@ -81,8 +92,8 @@ $ ->
     setTimeout ->
       activeRow.removeClass "active"
     , 400
-    
-  # --------------
+  
+  # -------------------------#
   # Slide up stuff
   
   class slideAntimator extends Antimator
@@ -100,6 +111,8 @@ $ ->
       else if pos[1] is 0
         @el.style["webkitTransitionTimingFunction"] = "cubic-bezier(.3,0,.7,.45)"
   
+  # --------------
+  
   window.slideUpAntimator = new slideAntimator
     element : $(".slide_up")[0]
     position : "bottom"
@@ -108,21 +121,6 @@ $ ->
     # starting position is the same, so can only move up one screen
     boundaries : [ 0, 0, 0, 1 ] 
   
-  # Bind slide screen actions
-  $(".write").bind "fastTap", ->
-    slideUpAntimator.slide("up")
-  
-  $(".close").bind "fastTap", ->
-    slideUpAntimator.slide("down")
-  
-  # --------------
-  
-  # Prevent touchmove on footer and header
-  $(".header").bind "touchmove", (e) ->
-    e.preventDefault()
-  $(".footer").bind "touchmove", (e) ->
-    e.preventDefault()
-
   # --------------
   # --------------
   

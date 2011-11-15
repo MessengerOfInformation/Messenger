@@ -7,21 +7,17 @@
   <meta name="apple-touch-fullscreen" content="yes"/>
     
   <title>Messenger</title>
-
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/app.css" />
-  <link rel="stylesheet" href="css/buttons.css" />
-  <link rel="stylesheet" href="css/message.css" />
+  
+  <link type="text/css" rel="stylesheet" href="css/compiled/boss.css">
   
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/icons/icon57x57.png" />
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icons/icon114x114.png">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icons/icon72x72.png" />
-
   <link rel="apple-touch-startup-image" href="img/splash.png" />
 </head>
 <body>
   <header class="app header">
-    <button class="back">Messages</button>
+    <button class="back" style="display:none">Messages</button>
     <h1>Messages</h1>
     <button class="icon write">W</button>
   </header>
@@ -37,7 +33,7 @@
         </div>
       </section>
     </div>
-    <div class="page_wrapper" id="messages_container">
+    <div class="page_wrapper" id="messages_container" style="display:none">
       <section class="page messages" id="messages"></section>
       
       <footer>

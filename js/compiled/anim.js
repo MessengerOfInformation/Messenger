@@ -1,26 +1,26 @@
 (function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
-    for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
-    function ctor() { this.constructor = child; }
-    ctor.prototype = parent.prototype;
-    child.prototype = new ctor;
-    child.__super__ = parent.prototype;
-    return child;
-  };
+  var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
   $(function() {
     var Antimator, BindPullStates, bindTapState, slideAntimator;
     Antimator = (function() {
+
       function Antimator(options) {
-        var defaultPositions, pos;
+        var defaultPositions;
+        var _this = this;
         this.options = options;
         this.el = this.options.element;
         this.boundaries = this.options.boundaries || [5, 5, 5, 5];
-        this.el.addEventListener("webkitTransitionEnd", __bind(function(e) {
-          if ((this.options.callback != null) && typeof this.options.callback === "function") {
-            this.options.callback(e, this.pos);
+        this.el.addEventListener("webkitTransitionEnd", function(e) {
+          if ((_this.options.callback != null) && typeof _this.options.callback === "function") {
+            _this.options.callback(e, _this.pos);
           }
-          return this.after(e, this.pos);
-        }, this));
+          if (_this.options.slideCallback) {
+            _this.options.slideCallback(e, _this.pos);
+            _this.options.slideCallback = void 0;
+          }
+          return _this.after(e, _this.pos);
+        });
         defaultPositions = {
           visible: [0, 0],
           left: [-1, 0],
@@ -28,45 +28,52 @@
           top: [0, -1],
           bottom: [0, 1]
         };
-        pos = defaultPositions[this.options.position];
-        this.before(pos);
-        this.transform(pos);
-        this.pos = pos;
+        this.pos = defaultPositions[this.options.position];
       }
-      Antimator.prototype.slide = function(dir) {
+
+      Antimator.prototype.init = function() {
+        this.before(this.pos);
+        return this.transform(pos);
+      };
+
+      Antimator.prototype.slide = function(direction, callback) {
         var movements;
+        var _this = this;
         movements = {
-          set: __bind(function(xy, boundary) {
-            var pos, setBoundary;
-            setBoundary = this.boundaries[boundary];
-            pos = this.pos[xy] + [-1, 1, -1, 1][boundary];
+          set: function(boundary) {
+            var pos, setBoundary, xy;
+            setBoundary = _this.boundaries[boundary];
+            xy = boundary > 1 ? 1 : 0;
+            pos = _this.pos[xy] + [-1, 1, -1, 1][boundary];
             if (Math.abs(pos) <= setBoundary) {
-              this.pos[xy] = pos;
+              _this.pos[xy] = pos;
               return true;
             } else {
               return false;
             }
-          }, this),
+          },
           left: function() {
-            return this.set(0, 0);
+            return this.set(0);
           },
           right: function() {
-            return this.set(0, 1);
+            return this.set(1);
           },
           up: function() {
-            return this.set(1, 2);
+            return this.set(2);
           },
           down: function() {
-            return this.set(1, 3);
+            return this.set(3);
           }
         };
-        if (movements[dir]()) {
+        if (typeof callback === "function") this.options.slideCallback = callback;
+        if (movements[direction]()) {
           this.before(this.pos);
-          return setTimeout(__bind(function() {
-            return this.transform(this.pos, 0);
-          }, this));
+          return setTimeout(function() {
+            return _this.transform(_this.pos, 0);
+          });
         }
       };
+
       Antimator.prototype.convertXYZ = function(pos) {
         var ret;
         ret = pos.map(function(x) {
@@ -75,21 +82,30 @@
         ret.push(0);
         return ret;
       };
+
       Antimator.prototype.transform = function(pos) {
         pos = this.convertXYZ(pos);
         return this.el.style["webkitTransform"] = "translate3d(" + (pos.join('%,')) + ")";
       };
+
       Antimator.prototype.before = function(pos) {
-        if (pos[0] === 0 && pos[1] === 0) {
+        var isVisible;
+        isVisible = pos.every(function(x) {
+          return x === 0;
+        });
+        if (isVisible) {
           return this.visible = true;
         } else {
           return this.visible = false;
         }
       };
+
       Antimator.prototype.after = function(event, pos) {
         return null;
       };
+
       return Antimator;
+
     })();
     window.pageAntimator = new Antimator({
       element: $(".pages_wrapper")[0],
@@ -98,23 +114,30 @@
     });
     $(".back").bind("fastTap", function() {
       var activeRow;
-      pageAntimator.slide("right");
+      pageAntimator.slide("right", function() {
+        $(".back").hide();
+        return $("#messages_container").hide();
+      });
       activeRow = $(".list").find(".active");
       return setTimeout(function() {
         return activeRow.removeClass("active");
       }, 400);
     });
     slideAntimator = (function() {
+
       __extends(slideAntimator, Antimator);
+
       function slideAntimator() {
         slideAntimator.__super__.constructor.apply(this, arguments);
       }
+
       slideAntimator.prototype.before = function(pos) {
         slideAntimator.__super__.before.call(this, pos);
         if (this.options.toggle && this.visible) {
           return this.el.style["display"] = "";
         }
       };
+
       slideAntimator.prototype.after = function(event, pos) {
         if (this.options.toggle && !this.visible) {
           this.el.style["display"] = "none";
@@ -125,7 +148,9 @@
           return this.el.style["webkitTransitionTimingFunction"] = "cubic-bezier(.3,0,.7,.45)";
         }
       };
+
       return slideAntimator;
+
     })();
     window.slideUpAntimator = new slideAntimator({
       element: $(".slide_up")[0],
@@ -133,41 +158,28 @@
       toggle: true,
       boundaries: [0, 0, 0, 1]
     });
-    $(".write").bind("fastTap", function() {
-      return slideUpAntimator.slide("up");
-    });
-    $(".close").bind("fastTap", function() {
-      return slideUpAntimator.slide("down");
-    });
-    $(".header").bind("touchmove", function(e) {
-      return e.preventDefault();
-    });
-    $(".footer").bind("touchmove", function(e) {
-      return e.preventDefault();
-    });
     BindPullStates = function(el) {
+      var _this = this;
       this.el = $(el);
       this.pulling = false;
       this.canTrigger = true;
-      this.el.bind('touchmove', __bind(function(e) {
+      this.el.bind('touchmove', function(e) {
         var scrollTop;
-        scrollTop = this.el[0].scrollTop;
-        if (scrollTop < 0) {
-          return this.move(scrollTop);
-        }
-      }, this)).bind('touchend', __bind(function(e) {
-        if (this.pulling) {
-          this.el.trigger("stopPull");
-          this.pulling = false;
-          if (this.canTrigger) {
-            this.el.trigger("triggerPull");
-            this.canTrigger = false;
-            return setTimeout(__bind(function() {
-              return this.canTrigger = true;
-            }, this), 4000);
+        scrollTop = _this.el[0].scrollTop;
+        if (scrollTop < 0) return _this.move(scrollTop);
+      }).bind('touchend', function(e) {
+        if (_this.pulling) {
+          _this.el.trigger("stopPull");
+          _this.pulling = false;
+          if (_this.canTrigger) {
+            _this.el.trigger("triggerPull");
+            _this.canTrigger = false;
+            return setTimeout(function() {
+              return _this.canTrigger = true;
+            }, 4000);
           }
         }
-      }, this));
+      });
       this.threshold = -40;
       return this.move = function(scrollTop) {
         if (scrollTop < this.threshold && this.pulling === false) {
@@ -189,13 +201,14 @@
       return $("#rotator")[0].style["webkitTransform"] = "rotate(0) translateZ(0)";
     }).bind("triggerPull", function() {
       var $notifs, checkTop, top;
+      var _this = this;
       $notifs = $(".notifs");
       top = $(".header").first().height();
       $notifs[0].style["top"] = top + "px";
       console.log("triggerPull");
-      return (checkTop = __bind(function() {
+      return (checkTop = function() {
         var scrollTop;
-        scrollTop = this.scrollTop;
+        scrollTop = _this.scrollTop;
         return setTimeout(function() {
           if (scrollTop >= 0) {
             return $notifs.show(0, function() {
@@ -207,7 +220,7 @@
             return checkTop();
           }
         }, 100);
-      }, this))();
+      })();
     });
     bindTapState = function(selector, element, options) {
       var defaults, sel;
@@ -246,4 +259,5 @@
     });
     return bindTapState(".header", "button");
   });
+
 }).call(this);
