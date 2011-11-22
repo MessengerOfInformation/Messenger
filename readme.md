@@ -24,3 +24,7 @@ Using -webkit-overflow-scrolling - so, this only works right on iOS 5 (or a desk
 * Pull to refresh icon sux + add text label showing state 
 * Plugins
 * iPad interface
+
+
+##### License
+© MIT
